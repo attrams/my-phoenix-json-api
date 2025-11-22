@@ -9,7 +9,8 @@ import Config
 
 config :my_app,
   ecto_repos: [MyApp.Repo],
-  generators: [timestamp_type: :utc_datetime, binary_id: true]
+  generators: [timestamp_type: :utc_datetime, binary_id: true],
+  migration_timestamps: [type: :utc_datetime_usec]
 
 # Configures the endpoint
 config :my_app, MyAppWeb.Endpoint,
