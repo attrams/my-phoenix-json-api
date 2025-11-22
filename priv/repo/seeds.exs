@@ -9,3 +9,10 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+
+alias MyApp.Account
+
+IO.puts("Adding a couple of users...")
+
+Account.create_user(%{email: "user1@email.com", password: "qwerty"})
+Account.create_user(%{email: "user2@email.com", password: "asdfgh"})
