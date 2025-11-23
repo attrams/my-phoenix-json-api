@@ -25,8 +25,10 @@ jobs:
         image: postgres
         ports: ['5432:5432']
         env:
-          DB_USERNAME: attrams
-          DB_PASSWORD: ''
+          POSTGRES_USER: ${{ secrets.DB_USERNAME }}
+          POSTGRES_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          DB_USERNAME: ${{ secrets.DB_USERNAME }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
