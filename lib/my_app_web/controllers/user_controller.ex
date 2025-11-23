@@ -45,11 +45,14 @@ defmodule MyAppWeb.UserController do
     case Account.authenticate_user(email, password) do
       {:ok, user} ->
         conn
+        |> put_session(:current_user_id, user.id)
+        |> configure_session(renew: true)
         |> put_status(:ok)
         |> render(:sign_in, user: user)
 
       {:error, message} ->
         conn
+        |> delete_session(:current_user_id)
         |> put_status(:unauthorized)
         |> put_view(MyAppWeb.ErrorJSON)
         |> render("401.json", message: message)
