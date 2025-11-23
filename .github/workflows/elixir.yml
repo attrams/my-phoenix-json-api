@@ -85,7 +85,7 @@ jobs:
         mix compile
 
         # Generate release artifact
-        mix phx.gen.release
+        mix release
 
         # Verify release folder exists
         ls -l _build/prod/rel
