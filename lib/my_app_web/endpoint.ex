@@ -48,5 +48,11 @@ defmodule MyAppWeb.Endpoint do
   plug Plug.MethodOverride
   plug Plug.Head
   plug Plug.Session, @session_options
+
+  plug Corsica,
+    origins: "*",
+    allow_credentials: true,
+    allow_headers: ["content-type", "authorization"]
+
   plug MyAppWeb.Router
 end

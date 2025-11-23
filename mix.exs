@@ -54,7 +54,8 @@ defmodule MyApp.MixProject do
       {:bandit, "~> 1.5"},
 
       # Custom libraries
-      {:argon2_elixir, "~> 4.1"}
+      {:argon2_elixir, "~> 4.1"},
+      {:corsica, "~> 2.0"}
     ]
   end
 
