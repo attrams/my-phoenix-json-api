@@ -12,7 +12,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  test-and-build:
+  test-and-release:
     runs-on: ubuntu-latest
 
     services:
@@ -55,7 +55,7 @@ jobs:
         key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
         restore-keys: ${{ runner.os }}-mix-
         
-    - name: Output Elixir version
+    - name: Output Elixir & Erlang version
       run: elixir --version
       
     - name: Output PostgreSQL version
@@ -80,10 +80,15 @@ jobs:
       run: |
         # Install only production deps
         mix deps.get --only prod
+
+        # Compile production code
         mix compile
 
         # Generate release artifact
         mix phx.gen.release
+
+        # Verify release folder exists
+        ls -l _build/prod/rel
 
     - name: Upload phoenix release
       uses: actions/upload-artifact@v4
