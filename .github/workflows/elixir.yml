@@ -71,3 +71,22 @@ jobs:
       
     - name: Run tests
       run: mix test
+
+    - name: Build production release
+      env:
+        MIX_ENV: prod
+        SECRET_KEY_BASE: ${{ secrets.SECRET_KEY_BASE }}
+        DATABASE_URL: ${{ secrets.DATABASE_URL_PROD }}
+      run: |
+        # Install only production deps
+        mix deps.get --only prod
+        mix compile
+
+        # Generate release artifact
+        mix phx.gen.release
+
+    - name: Upload phoenix release
+      uses: actions/upload-artifact@v4
+      with:
+        name: phoenix-release
+        path: _build/prod/rel
