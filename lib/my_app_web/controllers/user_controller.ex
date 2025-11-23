@@ -40,4 +40,19 @@ defmodule MyAppWeb.UserController do
       send_resp(conn, :no_content, "")
     end
   end
+
+  def sign_in(conn, %{"email" => email, "password" => password}) do
+    case Account.authenticate_user(email, password) do
+      {:ok, user} ->
+        conn
+        |> put_status(:ok)
+        |> render(:sign_in, user: user)
+
+      {:error, message} ->
+        conn
+        |> put_status(:unauthorized)
+        |> put_view(MyAppWeb.ErrorJSON)
+        |> render("401.json", message: message)
+    end
+  end
 end

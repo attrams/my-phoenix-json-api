@@ -15,6 +15,10 @@ defmodule MyAppWeb.UserJSON do
     %{data: data(user)}
   end
 
+  def sign_in(%{user: user}) do
+    %{data: %{user: %{id: user.id, email: user.email}}}
+  end
+
   defp data(%User{} = user) do
     %{
       id: user.id,
