@@ -71,11 +71,3 @@ jobs:
       
     - name: Run tests
       run: mix test
-
-    - name: Build production release
-      env:
-        MIX_ENV: prod
-        SECRET_KEY_BASE: ${{ secrets.SECRET_KEY_BASE }}
-        DATABASE_URL: ${{ secrets.DATABASE_URL_PROD }}
-      
-
